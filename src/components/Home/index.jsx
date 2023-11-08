@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
 import plus from "../../assets/svg/plus.svg";
 import Cart from "../Cart";
 import AddBook from "../AddBook";
 import md5 from "md5";
-import { useNavigate } from "react-router-dom";
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -12,11 +12,22 @@ const Home = () => {
   const [openModal, setOpenModal] = useState(false);
   const [books, setBooks] = useState([]);
   const navigate = useNavigate();
+  if (!localStorage.getItem("key")) {
+    navigate("/register");
+  }
   useEffect(() => {
-    if (!localStorage.getItem("key")) {
-      navigate("/register");
-    }
-    const sign = md5(`GET/books${localStorage.getItem("SecKey")}`);
+    const SecKey = localStorage.getItem("SecKey");
+    const sign = md5(`GET/books${SecKey}`);
+    const method = "POST";
+    const URL = "/books";
+    const body = { isbn: "9781118464465" };
+    const MySecret = localStorage.getItem("SecKey");
+    const signstr = `${method}${URL}${JSON.stringify(body)}Tayson`;
+    console.log(md5(signstr).toString(), "shunchaki");
+    console.log(
+      md5('POST/books{isbn:"9781118464465"}Tayson').toString(),
+      "add book"
+    );
     console.log(sign);
     fetch(`${REACT_APP_BASE_URL}/books`, {
       method: "GET",
@@ -31,6 +42,7 @@ const Home = () => {
           console.log(res);
           setBooks(res.data || []);
         } else {
+          console.log(res);
           setBooks([]);
         }
       })
@@ -38,7 +50,8 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="w-full from-gray-800 bg-gradient-to-r to-white">
+    <div className="w-full relative overflow-hidden min-h-screen">
+      <div className="bg-figure"></div>
       <div className="w-full max-w-7xl mx-auto">
         <Navbar />
         <div className="mt-9 w-full flex items-center justify-between">

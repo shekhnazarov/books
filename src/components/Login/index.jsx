@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="w-full flex items-center justify-center from-gray-800 bg-gradient-to-r to-white">
-      <div
+    <div className="w-full flex items-center relative overflow-hidden">
+      <div className="bg-figure"></div>
+      {/* <div
         className="bg-white py-12 px-7 my-48 rounded-xl"
         style={{ width: "430px" }}
       >
@@ -45,7 +46,7 @@ const Login = () => {
             </Link>
           </h5>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

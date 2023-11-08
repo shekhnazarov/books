@@ -55,9 +55,10 @@ const Register = () => {
     >
       {({ errors, touched, handleSubmit }) => (
         <Form onSubmit={handleSubmit}>
-          <div className="w-full flex items-center justify-center from-gray-800 bg-gradient-to-r to-white">
+          <div className="w-full flex items-center relative overflow-hidden justify-center">
+            <div className="bg-figure"></div>
             <div
-              className="bg-white py-12 px-7 my-48 rounded-xl"
+              className="bg-white py-12 px-7 my-24 rounded-xl"
               style={{ width: "430px" }}
             >
               <h2 className=" text-4xl font-bold text-center">Sign in</h2>

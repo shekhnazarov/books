@@ -17,31 +17,31 @@ const BookSchema = Yup.object().shape({
 const AddBook = ({ open }) => {
   const [openModal, setOpenModal] = open;
   return (
-    <Formik
-      initialValues={{
-        title: "",
-        author: "",
-        cover: "",
-        published: "",
-        pages: "",
-        isbn: "",
+    <Dialog
+      open={openModal}
+      onClose={() => {
+        setOpenModal(false);
       }}
-      validationSchema={BookSchema}
-      onSubmit={(values) => console.log(values)}
+      className="absolute z-50"
     >
-      {({ errors, touched, handleSubmit }) => (
-        <Form onSubmit={handleSubmit}>
-          <Dialog
-            open={openModal}
-            onClose={() => {
-              setOpenModal(false);
-            }}
-            className="absolute z-50"
-          >
-            <div className="fixed inset-0 bg-black/50" aria-hidden="true" />
-            <div className="fixed inset-0 overflow-y-auto">
-              <div className="flex min-h-full items-center justify-center p-4 ">
-                <Dialog.Panel className="mx-auto w-full max-w-md rounded-xl bg-white py-6 px-7">
+      <div className="fixed inset-0 bg-black/50" aria-hidden="true" />
+      <div className="fixed inset-0 overflow-y-auto">
+        <div className="flex min-h-full items-center justify-center p-4 ">
+          <Dialog.Panel className="mx-auto w-full max-w-md rounded-xl bg-white py-6 px-7">
+            <Formik
+              initialValues={{
+                title: "",
+                author: "",
+                cover: "",
+                published: "",
+                pages: "",
+                isbn: "",
+              }}
+              validationSchema={BookSchema}
+              onSubmit={(values) => console.log(values)}
+            >
+              {({ errors, touched, handleSubmit }) => (
+                <Form onSubmit={handleSubmit}>
                   <div className="flex justify-between items-center">
                     <h3 className="text-xl font-semibold">Create a book</h3>
                     <img
@@ -129,13 +129,13 @@ const AddBook = ({ open }) => {
                       Submit
                     </button>
                   </div>
-                </Dialog.Panel>
-              </div>
-            </div>
-          </Dialog>
-        </Form>
-      )}
-    </Formik>
+                </Form>
+              )}
+            </Formik>
+          </Dialog.Panel>
+        </div>
+      </div>
+    </Dialog>
   );
 };
 

@@ -15,3 +15,16 @@
     margin: 0;
   }
 }
+
+.bg-figure {
+  background: #333;
+  position: absolute;
+  width: 100vw;
+  height: 1900px;
+  transform: rotate(45deg);
+  left: -800px;
+  top: -760px;
+  box-sizing: border-box;
+  border-radius: 3%;
+  z-index: -1;
+}
