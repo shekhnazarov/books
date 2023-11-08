@@ -6,7 +6,7 @@ import account from "../../assets/png/accountImage.png";
 
 const Navbar = () => {
   return (
-    <div className="max-w-7xl w-full mx-auto flex justify-between items-center py-4">
+    <div className="flex justify-between items-center py-4">
       <div className="flex items-center">
         <img src={logo} alt="BookList" className="w-9 h-9 mr-5" />
         <h3 className="text-lg font-bold mr-6">
@@ -20,13 +20,13 @@ const Navbar = () => {
       <div className="flex items-center gap-x-6">
         <div className="relative">
           <img src={bell} alt="bell" />
-          <div className="w-2 h-2 rounded bg-red-500 absolute top-0"></div>
+          <div className="w-2 h-2 rounded bg-red-500 absolute top-0 right-0"></div>
         </div>
         <div>
           <img
             src={account}
             alt="Account"
-            className="border-4 border-purple-500 rounded-3xl w-9 h-9"
+            className="border-4 border-purple-600 rounded-3xl w-9 h-9"
           />
         </div>
       </div>

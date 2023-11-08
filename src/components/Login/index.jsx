@@ -34,7 +34,7 @@ const Login = () => {
           placeholder="Enter your username"
           className="w-full py-3 px-4 border border-gray-300 rounded-md mt-1 outline-none text-black text-base mb-4"
         />
-        <button className="w-full py-3 px-6 flex items-center justify-center bg-purple-700 mt-4 text-white font-medium rounded">
+        <button className="w-full py-3 px-6 flex items-center justify-center bg-purple-700 mt-4 text-white font-medium rounded cursor-pointer">
           Login
         </button>
         <div className="w-full flex justify-center mt-3">
