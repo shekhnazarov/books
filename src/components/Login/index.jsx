@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="w-full flex items-center justify-center bg-gray-500">
+    <div className="w-full flex items-center justify-center from-gray-800 bg-gradient-to-r to-white">
       <div
         className="bg-white py-12 px-7 my-48 rounded-xl"
         style={{ width: "430px" }}
