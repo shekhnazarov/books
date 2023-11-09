@@ -117,14 +117,14 @@ const AddBook = ({ open }) => {
                   ) : null}
                   <div className="flex items-center gap-x-3 mt-4">
                     <button
-                      className="w-full py-3 px-6 flex items-center justify-center border border-purple-700 mt-4 text-purple-700 font-medium rounded hover:bg-purple-700 hover:text-white cursor-pointer"
+                      className="w-full py-3 px-6 flex items-center justify-center border border-blue-700 mt-4 text-blue-700 font-medium rounded hover:bg-blue-700 hover:text-white cursor-pointer"
                       onClick={() => setOpenModal(false)}
                     >
                       Close
                     </button>
                     <button
                       type="submit"
-                      className="w-full py-3 px-6 flex items-center justify-center bg-purple-700 mt-4 text-white font-medium rounded hover:border hover:border-purple-700 hover:bg-white hover:text-purple-700 cursor-pointer"
+                      className="w-full py-3 px-6 flex items-center justify-center bg-blue-700 mt-4 text-white font-medium rounded hover:border hover:border-blue-700 hover:bg-white hover:text-blue-700 cursor-pointer"
                     >
                       Submit
                     </button>

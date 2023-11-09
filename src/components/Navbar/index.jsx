@@ -1,4 +1,4 @@
-import React, { useState, useTransition } from "react";
+import React, { useRef, useState } from "react";
 import logo from "../../assets/svg/logo.svg";
 import bell from "../../assets/svg/bell.svg";
 import account from "../../assets/png/accountImage.png";
@@ -8,18 +8,16 @@ const Navbar = () => {
   const [isFocus, setIsFocus] = useState(
     localStorage.getItem("isFocus") || false
   );
-  const [, startTransition] = useTransition();
+  const searchRef = useRef();
   const navigate = useNavigate();
   const { title } = useParams();
 
-  const onChangeSearch = ({ target: { value } }) => {
-    startTransition(() => {
-      if (value) {
-        navigate(`/home/:${value}`);
-      } else {
-        navigate("/home");
-      }
-    });
+  const onSearch = () => {
+    if (searchRef.current.value) {
+      navigate(`/home/:${searchRef.current.value}`);
+    } else {
+      navigate("/home");
+    }
   };
 
   const handleFocus = () => {
@@ -35,15 +33,17 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center py-4">
       <div className="flex items-center">
-        <img
-          src={logo}
-          alt="BookList"
-          className="w-9 h-9 mr-5 cursor-pointer"
-        />
-        <h3 className="text-lg font-bold cursor-pointer">
-          <span className=" text-purple-600 mr-1">Books</span>
-          <span className="text-white">List</span>
-        </h3>
+        <div className="flex items-center" onClick={() => navigate("/home")}>
+          <img
+            src={logo}
+            alt="BookList"
+            className="w-9 h-9 mr-5 cursor-pointer"
+          />
+          <h3 className="text-lg font-bold cursor-pointer">
+            <span className=" text-blue-600 mr-1">Books</span>
+            <span className="text-white">List</span>
+          </h3>
+        </div>
         <div
           className={`flex items-center cursor-pointer relative ${
             isFocus ? "ml-6" : ""
@@ -56,6 +56,7 @@ const Navbar = () => {
             viewBox="0 0 24 24"
             fill="none"
             className="absolute left-4"
+            onClick={onSearch}
           >
             <path
               d="M21 21L16.65 16.65M11 6C13.7614 6 16 8.23858 16 11M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
@@ -66,8 +67,8 @@ const Navbar = () => {
             />
           </svg>
           <input
+            ref={searchRef}
             defaultValue={title ? title.substring(1, title.length) : ""}
-            onChange={onChangeSearch}
             onFocus={handleFocus}
             onBlur={handleBlur}
             type="text"
@@ -87,7 +88,7 @@ const Navbar = () => {
           <img
             src={account}
             alt="Account"
-            className="border-4 border-purple-600 rounded-3xl w-9 h-9 cursor-pointer"
+            className="border-4 border-blue-600 rounded-3xl w-9 h-9 cursor-pointer"
           />
         </div>
       </div>

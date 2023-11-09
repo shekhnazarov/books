@@ -136,14 +136,14 @@ const Register = () => {
               </h5>
               <button
                 type="submit"
-                className="w-full py-3 px-6 flex items-center justify-center bg-purple-700 mt-4 text-white font-medium rounded"
+                className="w-full py-3 px-6 flex items-center justify-center bg-blue-700 mt-4 text-white font-medium rounded"
               >
                 Login
               </button>
               <div className="w-full flex justify-center mt-3">
                 <h5 className="text-sm">
                   Already signed up?{" "}
-                  <Link to="/login" className=" text-purple-700">
+                  <Link to="/login" className=" text-blue-700">
                     Go to sign in.
                   </Link>
                 </h5>

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="w-full flex items-center relative overflow-hidden">
+    <div className="w-full flex items-center relative overflow-hidden justify-center">
       <div className="bg-figure"></div>
-      {/* <div
-        className="bg-white py-12 px-7 my-48 rounded-xl"
+      <div
+        className="bg-white py-12 px-7 my-24 rounded-xl"
         style={{ width: "430px" }}
       >
         <h2 className=" text-4xl font-bold text-center">Sign up</h2>
@@ -35,18 +35,18 @@ const Login = () => {
           placeholder="Enter your username"
           className="w-full py-3 px-4 border border-gray-300 rounded-md mt-1 outline-none text-black text-base mb-4"
         />
-        <button className="w-full py-3 px-6 flex items-center justify-center bg-purple-700 mt-4 text-white font-medium rounded cursor-pointer">
+        <button className="w-full py-3 px-6 flex items-center justify-center bg-blue-700 mt-4 text-white font-medium rounded cursor-pointer">
           Login
         </button>
         <div className="w-full flex justify-center mt-3">
           <h5 className="text-sm">
             Already signed up?{" "}
-            <Link to="/register" className=" text-purple-700">
+            <Link to="/register" className=" text-blue-700">
               Go to sign in.
             </Link>
           </h5>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

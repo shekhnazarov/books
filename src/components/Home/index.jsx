@@ -1,46 +1,51 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import useRequest from "../../hook/useRequest";
 import Navbar from "../Navbar";
 import plus from "../../assets/svg/plus.svg";
 import Cart from "../Cart";
 import AddBook from "../AddBook";
 import md5 from "md5";
 
-const { REACT_APP_BASE_URL } = process.env;
-
 const Home = () => {
   const [openModal, setOpenModal] = useState(false);
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const request = useRequest();
   if (!localStorage.getItem("key")) {
     navigate("/register");
   }
+  console.log(
+    JSON.stringify({
+      author: "bell hooks",
+      cover: "https://covers.openlibrary.org/b/id/8716948-M.jpg",
+      isbn: "1138821624",
+      pages: 138,
+      published: 2014,
+      title: "Feminism Is for Everybody: Passionate Politics",
+    }),
+    "jsonstringify"
+  );
+  console.log(
+    md5(
+      `POST/books{"author":"bell hooks","cover":"https://covers.openlibrary.org/b/id/8716948-M.jpg","isbn":"1138821624","pages":138,"published":2014,"title":"Feminism Is for Everybody: Passionate Politics"}Terry`
+    ),
+    "testtttt"
+  );
   const { title } = useParams();
   useEffect(() => {
     setIsLoading(true);
-    const SecKey = localStorage.getItem("SecKey");
     const method = "GET";
     const URL = !title
       ? "/books"
-      : `/books/:"${title.substring(1, title.length)}"`;
-    console.log(md5('POST/books{isbn:"0143109790"}Terry'), "test");
-    const signstr = md5(`${method}${URL}${SecKey}`).toString();
-    fetch(`${REACT_APP_BASE_URL}${URL}`, {
-      method: "GET",
-      headers: {
-        Key: "Terry",
-        Sign: signstr,
-      },
-    })
-      .then((res) => res.json())
+      : `/books/:"${title?.substring(1, title?.length)}"`;
+    request({ method, url: URL })
       .then((res) => {
         if (res.isOk) {
-          console.log(res);
           setBooks(res.data || []);
           setIsLoading(false);
         } else {
-          console.log(res);
           setBooks([]);
           setIsLoading(false);
         }
@@ -49,6 +54,7 @@ const Home = () => {
         console.log(err);
         setIsLoading(false);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [title]);
 
   return (
@@ -59,7 +65,7 @@ const Home = () => {
         <div className="mt-9 w-full flex items-center justify-between">
           <h1 className="text-white text-4xl font-bold">
             You’ve got{" "}
-            <span className=" text-purple-700">{books?.length || 0} book</span>
+            <span className=" text-blue-700">{books?.length || 0} book</span>
           </h1>
           <div className="flex items-center gap-x-6">
             <input
@@ -68,7 +74,7 @@ const Home = () => {
               placeholder="Enter your name"
             />
             <button
-              className="border-none px-6 h-11 rounded text-white bg-blue-600 border border-blue-600 flex items-center gap-x-3"
+              className="border-none px-6 h-11 rounded text-white bg-blue-700 border border-blue-700 flex items-center gap-x-3"
               onClick={() => setOpenModal(true)}
             >
               <img src={plus} alt="plus" />
@@ -80,14 +86,16 @@ const Home = () => {
         {isLoading ? (
           <div>Loading...</div>
         ) : (
-          <div className="mt-9 grid grid-cols-3 w-full">
+          <div className="w-full">
             {books.length ? (
-              books.map((book, index) => (
-                <Cart key={index} book={title ? book : book?.book} />
-              ))
+              <div className="mt-9 grid grid-cols-3 w-full">
+                {books.map((book, index) => (
+                  <Cart key={index} book={title ? book : book?.book} />
+                ))}
+              </div>
             ) : (
-              <h1 className=" text-4xl text-purple-700 font-semibold">
-                No book, please enter other name
+              <h1 className=" text-4xl text-blue-700 font-semibold mt-4">
+                No book, please add book or search!
               </h1>
             )}
           </div>
