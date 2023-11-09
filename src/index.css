@@ -18,12 +18,12 @@
 
 .bg-figure {
   background: #333;
-  position: absolute;
+  position: fixed;
   width: 100vw;
-  height: 1900px;
+  height: 130vw;
   transform: rotate(45deg);
-  left: -800px;
-  top: -760px;
+  left: -50vw;
+  top: -50vw;
   box-sizing: border-box;
   border-radius: 3%;
   z-index: -1;

@@ -1,5 +1,9 @@
 import React from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 import HomePage from "../pages/home";
 import LoginPage from "../components/Login";
 import RegisterPage from "../pages/register";
@@ -9,6 +13,14 @@ const Root = () => {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <Navigate to="/home" />,
+    },
+    {
+      path: "/home",
+      element: <HomePage />,
+    },
+    {
+      path: "/home/:title",
       element: <HomePage />,
     },
     {
