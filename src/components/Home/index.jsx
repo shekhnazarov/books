@@ -5,7 +5,6 @@ import Navbar from "../Navbar";
 import plus from "../../assets/svg/plus.svg";
 import Cart from "../Cart";
 import AddBook from "../AddBook";
-import md5 from "md5";
 
 const Home = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -16,23 +15,6 @@ const Home = () => {
   if (!localStorage.getItem("key")) {
     navigate("/register");
   }
-  console.log(
-    JSON.stringify({
-      author: "bell hooks",
-      cover: "https://covers.openlibrary.org/b/id/8716948-M.jpg",
-      isbn: "1138821624",
-      pages: 138,
-      published: 2014,
-      title: "Feminism Is for Everybody: Passionate Politics",
-    }),
-    "jsonstringify"
-  );
-  console.log(
-    md5(
-      `POST/books{"author":"bell hooks","cover":"https://covers.openlibrary.org/b/id/8716948-M.jpg","isbn":"1138821624","pages":138,"published":2014,"title":"Feminism Is for Everybody: Passionate Politics"}Terry`
-    ),
-    "testtttt"
-  );
   const { title } = useParams();
   useEffect(() => {
     setIsLoading(true);

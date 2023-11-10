@@ -40,14 +40,11 @@ const Register = () => {
             if (res?.data) {
               localStorage.setItem("key", res.data.key);
               localStorage.setItem("SecKey", res.data.secret);
-              console.log(res.data.secret);
               toast("Siz ro'yhatdan muvaffaqiyatli o'tdingiz");
               navigate("/");
-              console.log(res);
             } else {
               toast(res.message);
               setError(res.message);
-              console.log(res);
             }
           })
           .catch((err) => console.log(err));

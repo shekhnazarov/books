@@ -15,7 +15,7 @@
     margin: 0;
   }
 }
-
+/* bg-image */
 .bg-figure {
   background: #333;
   position: fixed;
@@ -28,7 +28,9 @@
   border-radius: 3%;
   z-index: -1;
 }
+/* bg-image finish */
 
+/* book cart */
 .cart:hover .del-cart {
   display: flex !important;
 }
@@ -36,3 +38,4 @@
 .cart:hover .edit-cart {
   display: flex !important;
 }
+/* book cart finish */

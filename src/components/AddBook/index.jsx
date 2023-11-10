@@ -4,6 +4,8 @@ import cancel from "../../assets/svg/cancel.svg";
 import linksvg from "../../assets/svg/link.svg";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import useRequest from "../../hook/useRequest";
+import { toast } from "react-toastify";
 
 const BookSchema = Yup.object().shape({
   title: Yup.string(),
@@ -16,6 +18,7 @@ const BookSchema = Yup.object().shape({
 
 const AddBook = ({ open }) => {
   const [openModal, setOpenModal] = open;
+  const request = useRequest();
   return (
     <Dialog
       open={openModal}
@@ -38,7 +41,31 @@ const AddBook = ({ open }) => {
                 isbn: "",
               }}
               validationSchema={BookSchema}
-              onSubmit={(values) => console.log(values)}
+              onSubmit={(values) => {
+                request({
+                  method: "POST",
+                  url: "/books",
+                  data: {
+                    title: values.title,
+                    author: values.author,
+                    cover: values.cover,
+                    published: values.published,
+                    pages: values.pages,
+                    isbn: values.isbn,
+                  },
+                })
+                  .then((res) => {
+                    if (!res?.isOk) {
+                      toast(
+                        "Hozirda server bilan muommo bor, iltimos keyinroq urinib ko'ring!"
+                      );
+                    } else {
+                      toast("Kitob muvaffaqiyatli qo'shildi!");
+                      window.location.reload(false);
+                    }
+                  })
+                  .catch((err) => console.log(err));
+              }}
             >
               {({ errors, touched, handleSubmit }) => (
                 <Form onSubmit={handleSubmit}>
